@@ -1,37 +1,32 @@
 class Solution:
 
-    def findMaxLength(self,nums) -> int:
-        self.barr = nums
-        print(self.barr)
+    def findMaxLength(self, nums) -> int:
+        num_array = nums
+        print("Original Array:", num_array)
 
-        tbarr = [1] * len(nums)
+        # Generate modified array where 0 is replaced with -1
+        modified_array = [1 if num == 1 else -1 for num in num_array]
+        print("Modified Array:", modified_array)
 
-        print(tbarr)
-        for i in range(len(nums)):
-            if self.barr[i] == 0:
-                tbarr[i] = -1
-        print(tbarr)
+        # Calculate prefix sum array
+        prefix_sum = [0] * (len(modified_array) + 1)
 
-        psum_tbarr = [0] * (len(tbarr)+1)
+        for i in range(1, len(prefix_sum)):
+            prefix_sum[i] = prefix_sum[i - 1] + modified_array[i - 1]
 
-        for i in range(1, (len(tbarr)+1)):
-            psum_tbarr[i] = psum_tbarr[i-1] + tbarr[i-1]
+        print("Prefix Sum Array:", prefix_sum)
 
-        print(psum_tbarr)
+        # Find the index where the prefix sum first equals 0
+        max_length_index = 0
+        for i in range(1, len(prefix_sum)):
+            if prefix_sum[i] == 0:
+                max_length_index = i
 
-        for i in range(1,len(psum_tbarr)):
-            if psum_tbarr[i] == 0:
-                count = i
+        # Generate subarray of maximum length
+        subarray = [num_array[i] for i in range(max_length_index)]
 
-        ans = [0] * count
+        print(f"Subarray of Maximum Length with equal 0s and 1s:", subarray)
 
-        for i in range(count):
-            ans[i] = self.barr[i]
-
-        print(ans)
-
+# Example usage
 obj = Solution()
-obj.findMaxLength([0,1,1,1,0,0,1,0,1])
-
-
-
+obj.findMaxLength([0, 1, 1, 1, 0, 0, 1, 0, 1])
