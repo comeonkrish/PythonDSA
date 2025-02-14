@@ -8,18 +8,16 @@ class Solution:
                 sum_squares += digit ** 2
                 num //= 10
             return sum_squares
+
+        slow = n
+        fast = get_sum_of_squares(n)
         
-        seen = set()  
+        while fast != 1 and slow != fast:
+            slow = get_sum_of_squares(slow)  
+            fast = get_sum_of_squares(get_sum_of_squares(fast))  
         
-        while n != 1:
-            if n in seen:
-                return False
-            seen.add(n)
-            n = get_sum_of_squares(n)
-        
-        return True
+        return fast == 1
 
 obj = Solution()
-ans = obj.isHappy(19)
-print(ans)
-
+ans = obj.isHappy(23)
+print(ans)  
