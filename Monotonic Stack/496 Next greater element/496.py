@@ -27,6 +27,6 @@ class Solution:
         return ans
 
 obj = Solution()
-answer = obj.nextGreaterElement([], [])
+answer = obj.nextGreaterElement([4,1,2], [1,3,4,2])
 print(answer)
         
