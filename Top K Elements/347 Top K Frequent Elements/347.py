@@ -16,9 +16,8 @@ class Solution:
         for num, freq in freq_map.items():
             heapq.heappush(heap, (freq, num))  
         
-        
-        if len(heap) > k:
-            heapq.heappop(heap)
+            if len(heap) > k:
+                heapq.heappop(heap)
     
         top_k_elements = []
     
